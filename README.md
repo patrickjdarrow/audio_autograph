@@ -9,4 +9,4 @@
 - An averaging filter is run over the image, calculating the mean pixel intensity for each square in a grid.
 - Each square then plays a note corresponding to its height in the image at a time corresponding to it's horizontal position.
 
-![](https://i.gyazo.com/e20bffa819378ac1628e252e1c66286c.mp4)
+![](https://i.gyazo.com/e20bffa819378ac1628e252e1c66286c.gif)
