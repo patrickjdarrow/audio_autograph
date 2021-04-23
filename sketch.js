@@ -1,8 +1,9 @@
 // p5 Params
 // https://p5js.org/reference/
-let x = 1600
-let y = 800
+let x = 1200
+let y = 600
 let fr = 60
+let yPad = 100
 
 // Frequency bins
 let binSize = 36
@@ -31,6 +32,7 @@ let spectrogram = math.zeros(nx,ny)
 function setup() {
 
     cnv = createCanvas(x, y)
+    cnv.position((windowWidth - x)/2, yPad)
 
     frameRate(fr)
     background(0)
@@ -38,12 +40,15 @@ function setup() {
     strokeWeight(15)
 
     playButton = createButton('Listen / STOP');
-    playButton.position(x/2, y);
+    playButton.position(windowWidth/2 - 50, y + yPad + 5);
     playButton.mousePressed(play);
 
     resetButton = createButton('Reset');
-    resetButton.position(0, y);
+    resetButton.position((windowWidth - x)/2, y + yPad + 5);
     resetButton.mousePressed(reset);
+
+    volume = createSlider(0, 100, 50, 5);
+    volume.position(x + (windowWidth - x)/2 - 150, y + yPad + 5)
 }
 
 
@@ -54,7 +59,7 @@ function draw() {
 
         if (xpos < nx) {
             for (var ypos = 0; ypos < ny; ypos++) {
-                Synth.setVolume(spectrogram.subset(math.index(xpos,ypos)) / 300.0)
+                Synth.setVolume(spectrogram.subset(math.index(xpos,ypos)) / 1000.0 * (volume.value() / 100.0))
                 piano.play(naturals[ypos][0], naturals[ypos][1], 0.5)
             }
 
